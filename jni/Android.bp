@@ -48,7 +48,11 @@ cc_library_shared {
         "com_android_bluetooth_csip_client.cpp",
         "com_android_bluetooth_csip_setcoordinator.cpp",
     ],
-    header_libs: ["libbluetooth_headers", "libnativehelper_header_only"],
+    header_libs: [
+        "jni_headers",
+        "libbluetooth_headers",
+        "libnativehelper_header_only",
+    ],
     include_dirs: [
         "packages/modules/Bluetooth/system/types",
         "vendor/qcom/opensource/commonsys/bluetooth_ext/vhal/include",
