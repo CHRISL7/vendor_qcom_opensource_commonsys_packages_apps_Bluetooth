@@ -1061,7 +1061,6 @@ public class HeadsetService extends ProfileService {
             return service.isInbandRingingEnabled();
         }
 
-        @Override
         public void phoneStateChangedDsDa(int numActive, int numHeld, int callState, String number,
                 int type, String name, AttributionSource source) {
            HeadsetService service = getService(source);
@@ -1071,7 +1070,6 @@ public class HeadsetService extends ProfileService {
            service.phoneStateChanged(numActive, numHeld, callState, number, type, name, false);
        }
 
-       @Override
        public void clccResponseDsDa(int index, int direction, int status, int mode, boolean mpty,
               String number, int type, AttributionSource source) {
           HeadsetService service = getService(source);
