@@ -528,6 +528,11 @@ public class GattService extends ProfileService {
                     return client;
                 }
             }
+            for (ScanClient client : mScanManager.getPendingScanQueue()) {
+                if (client.scannerId == clientIf) {
+                    return client;
+                }
+            }
             return null;
         }
     }
@@ -1321,10 +1326,7 @@ public class GattService extends ProfileService {
 
             if (!hasPermission && client.callingPackage != null
                                && client.callingPackage.equals("com.android.bluetooth")) {
-                if (client.filters.size() == 1 &&
-                        client.filters.get(0).getGroupFilteringValue()) {
-                    hasPermission = true;
-                }
+                hasPermission = true;
             }
 
             if (!hasPermission || !matchesFilters(client, result)) {
@@ -2496,6 +2498,7 @@ public class GattService extends ProfileService {
             app.recordScanStart(settings, filters, isFilteredScan, isCallbackScan, scannerId);
         }
 
+        mScanManager.addPendingScanToQueue(scanClient);
         mScanManager.startScan(scanClient);
     }
 
